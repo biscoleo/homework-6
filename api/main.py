@@ -3,15 +3,17 @@ from pydantic import BaseModel, Field
 import joblib
 from pathlib import Path
 import json
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 
 app = FastAPI()
 
 # LOGGING
-LOG_DIR = Path("/logs")
+LOG_DIR = Path("logs")
 LOG_FILE = LOG_DIR/ "prediction_logs.json"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
+
+MODEL_PATH = Path(__file__).parent / "sentiment_model.pkl"
 
 # Field and min_length at 1 allow me to use pydantic so I don't need to manually do if not input.text.strip() in my endpoint functions
 class TextInput(BaseModel):
@@ -23,7 +25,7 @@ class SentimentResponse(BaseModel):
 
 # load the model just once at startup
 try:
-    model = joblib.load('sentiment_model.pkl')
+    model = joblib.load(MODEL_PATH)
 except Exception:
     raise HTTPException(status_code=500, detail='Model could not be loaded')
 
@@ -43,7 +45,7 @@ def predict_sentiment(input: TextInput):
         prediction = model.predict([input.text])[0]
         # waht to store in log entry
         log_entry = {
-            "timestamp": datetime.now(UTC).isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "request_text": input.text,
             "predicted_sentiment": prediction,
             "true_sentiment": input.true_sentiment
