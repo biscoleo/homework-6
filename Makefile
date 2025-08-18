@@ -14,7 +14,7 @@ build-api:
 # 	@echo "Running Docker container..."
 # 	docker run --rm -p 8000:8000 -v sentiment-logs:/logs $(API_IMAGE)
 run-api:
-	docker run --rm -p 8000:8000 -v "$(PWD)/logs:/logs" $(API_IMAGE)
+	docker run -d -p 8000:8000 -v "$(PWD)/logs:/logs" $(API_IMAGE)
 
 build-monitor:
 	@echo "Building Docker image: $(MONITOR_IMAGE)"
@@ -24,7 +24,7 @@ build-monitor:
 # 	@echo "Running Docker container..."
 # 	docker run --rm -p 8501:8501 -v sentiment-logs:/logs $(MONITOR_IMAGE)
 run-monitor:
-	docker run --rm -p 8501:8501 -v "$(PWD)/logs:/logs" $(MONITOR_IMAGE)
+	docker run -d -p 8501:8501 -v "$(PWD)/logs:/logs" $(MONITOR_IMAGE)
 
 
 clean:
