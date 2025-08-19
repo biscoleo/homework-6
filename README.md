@@ -71,10 +71,10 @@ The two services run in separate Docker containers sharing a volume for logs, en
 
 ### **FastAPI SERVICE**
 
-| Method      | Endpoint      | Description                                   |
-|-----------------------------------------------------------------------------|
-| GET       |    /health     | Returns {"status":"ok}                         |
-| POST      |    /predict    | Accepts text and returns sentiment prediction  |
+| Method | Endpoint         | Description                                             |
+|--------|------------------|---------------------------------------------------------|
+| GET    | `/health`        | Returns `"status": "ok"` to verify the service is live |
+| POST   | `/predict`       | Accepts text and returns sentiment prediction          |
 
 Example POST /predict payload:
 
@@ -270,7 +270,7 @@ You can also test it like this too:
 
 
 You can also run ```sudo docker ps``` to see that the containers are up and running
-![Alt text]("visuals/docker ps.png")
+![Alt text](visuals/docker_ps.png)
 ---
 
 ### **TESTING**
