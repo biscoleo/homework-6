@@ -214,6 +214,7 @@ sudo sytemctl enable docker
 sudo dnf install -y git
 ```
 I recommend checking to be sure Docker and Git are installed successfully by running
+
 ```bash
 sudo docker --version
 git --version
@@ -270,7 +271,9 @@ You can also test it like this too:
 
 
 You can also run ```sudo docker ps``` to see that the containers are up and running
+
 ![Alt text](visuals/docker_ps.png)
+
 ---
 
 ### **TESTING**
